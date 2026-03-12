@@ -1,0 +1,20 @@
+{
+  "servers": [
+    {
+      "id": "example-server",
+      "name": "Example Server",
+      "host": "example.com",
+      "port": 22,
+      "username": "deploy",
+      "authMethod": "key"
+    }
+  ],
+  "settings": {
+    "defaultConnectTimeout": 30000,
+    "defaultKeepaliveInterval": 60000,
+    "commandTimeout": 60000,
+    "maxConnections": 5,
+    "autoReconnect": false,
+    "logCommands": true
+  }
+}
