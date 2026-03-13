@@ -6,15 +6,7 @@
 
 ## 配置文件位置
 
-配置文件可以放在两个位置（优先级从高到低）：
-
-### 1. 项目目录（推荐）
-```
-C:\workspace\develop\ccExtensions\mcpHydroSSH\ssh-mcp-config.json
-```
-**适用场景**：项目专用配置，团队成员共享
-
-### 2. 用户目录
+配置文件位于用户目录：
 ```
 ~/.claude/ssh-mcp-config.json
 ```
@@ -88,8 +80,7 @@ C:\workspace\develop\ccExtensions\mcpHydroSSH\ssh-mcp-config.json
       "port": 22,
       "username": "deploy",
       "authMethod": "agent",
-      "connectTimeout": 30000,
-      "keepaliveInterval": 60000
+      "connectTimeout": 30000
     },
     {
       "id": "test-server",
@@ -104,6 +95,7 @@ C:\workspace\develop\ccExtensions\mcpHydroSSH\ssh-mcp-config.json
   ],
   "settings": {
     "defaultConnectTimeout": 30000,
+    "defaultKeepaliveInterval": 60000,
     "commandTimeout": 60000,
     "maxConnections": 5,
     "autoReconnect": false,
@@ -128,34 +120,18 @@ C:\workspace\develop\ccExtensions\mcpHydroSSH\ssh-mcp-config.json
 | `privateKeyPath` | ❌ | 私钥路径（`authMethod=key` 时需要） |
 | `password` | ❌ | 密码（`authMethod=password` 时需要） |
 | `connectTimeout` | ❌ | 连接超时（毫秒），默认 30000 |
-| `keepaliveInterval` | ❌ | 心跳间隔（毫秒），默认 60000 |
 
 ### 全局设置
 | 字段 | 说明 | 默认值 |
 |------|------|--------|
 | `defaultConnectTimeout` | 默认连接超时 | 30000 |
+| `defaultKeepaliveInterval` | 默认心跳间隔（毫秒） | 60000 |
 | `commandTimeout` | 命令执行超时 | 60000 |
 | `maxConnections` | 最大连接数 | 5 |
 | `autoReconnect` | 自动重连 | false |
 | `logCommands` | 记录命令日志 | true |
 
----
-
-## 添加服务器的步骤
-
-1. **复制配置文件**
-   ```bash
-   # Windows (Git Bash)
-   cp example-config.json ssh-mcp-config.json
-
-   # 或在项目目录直接新建 ssh-mcp-config.json
-   ```
-
-2. **编辑配置**
-   打开 `ssh-mcp-config.json`，在 `servers` 数组中添加你的服务器
-
-3. **保存并重试**
-   Claude Code 会自动重新加载配置
+**心跳配置说明：** `defaultKeepaliveInterval` 用于设置 SSH 连接的心跳间隔，保持长连接活跃，防止因超时而断开。
 
 ---
 
