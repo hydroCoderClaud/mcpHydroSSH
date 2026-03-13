@@ -1,6 +1,6 @@
 # mcp-hydrocoder-ssh
 
-为 Claude Code 提供 SSH 远程连接能力的 MCP 服务器。连接远程服务器、执行命令、自动化部署，无需离开对话界面。
+为 Claude Code 提供 SSH 远程连接能力的 MCP 服务器。连接远程服务器、执行命令、自动化部署，无需单独打开 SSH 工具窗口。
 
 [![npm version](https://img.shields.io/npm/v/mcp-hydrocoder-ssh.svg)](https://www.npmjs.com/package/mcp-hydrocoder-ssh)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -24,7 +24,7 @@
 | **无需切换窗口** | 在 Claude Code 对话中完成所有远程操作 |
 | **智能部署** | Claude 可根据命令输出自动判断下一步操作 |
 | **多服务器管理** | 同时管理多个服务器配置，快速切换 |
-| **安全认证** | 支持 SSH agent、密钥文件，密码不持久化 |
+| **安全认证** | 支持 SSH agent、密钥文件 |
 | **连接池管理** | 保持长连接，避免重复认证和连接开销 |
 
 ### 可用工具
@@ -108,7 +108,7 @@ npm install -g mcp-hydrocoder-ssh
 列出可用的 SSH 服务器
 ```
 
-如果看到服务器列表（空列表表示尚未配置），说明安装成功。
+如果看到服务器列表（空列表表示尚未配置），说明安装成功。你可以通过自然语言让 Claude 帮你添加配置、修改配置或连接服务器，连接后可以执行各种操作。
 
 ---
 
@@ -142,31 +142,23 @@ npm run build
 
 编辑用户目录的 `~/.claude.json` 文件：
 
-**Windows 路径：**
+**Windows 路径：** `C:\Users\<你的用户名>\.claude.json`
+**macOS/Linux 路径：** `~/.claude.json`
+
 ```json
 {
   "mcpServers": {
     "hydrossh": {
       "command": "node",
-      "args": ["C:\\workspace\\develop\\ccExtensions\\mcpHydroSSH\\dist\\index.js"]
+      "args": ["<项目绝对路径>/dist/index.js"]
     }
   }
 }
 ```
 
-**macOS/Linux 路径：**
-```json
-{
-  "mcpServers": {
-    "hydrossh": {
-      "command": "node",
-      "args": ["/path/to/mcpHydroSSH/dist/index.js"]
-    }
-  }
-}
-```
-
-> **注意：** 将路径替换为你实际的源码目录绝对路径。
+> **注意：** 将 `<项目绝对路径>` 替换为你实际的源码目录绝对路径。
+> - Windows 示例：`C:\\workspace\\develop\\ccExtensions\\mcpHydroSSH`
+> - macOS/Linux 示例：`/home/user/projects/mcpHydroSSH`
 
 ### 5. 重启 Claude Code
 
@@ -180,16 +172,19 @@ npm run dev
 ```
 
 此时 Claude Code 配置改为：
+
 ```json
 {
   "mcpServers": {
     "hydrossh": {
       "command": "npx",
-      "args": ["tsx", "C:\\workspace\\develop\\ccExtensions\\mcpHydroSSH\\src\\index.ts"]
+      "args": ["tsx", "<项目绝对路径>/src/index.ts"]
     }
   }
 }
 ```
+
+> **注意：** 将 `<项目绝对路径>` 替换为你实际的源码目录绝对路径。
 
 ---
 
@@ -233,7 +228,7 @@ npm run dev
 | 方式 | 配置 | 说明 |
 |------|------|------|
 | **SSH Agent** | `"authMethod": "agent"` | 推荐，使用系统 SSH agent |
-| **密钥文件** | `"authMethod": "key", "privateKeyPath": "~/.ssh/id_rsa"` | 直接读取密钥文件 |
+| **密钥文件** | `"authMethod": "key", "privateKeyPath": "~/.ssh/id_rsa"` | 默认，直接读取密钥文件 |
 | **密码** | `"authMethod": "password", "password": "xxx"` | 不推荐，密码会明文存储 |
 
 详见 [CONFIG-GUIDE.md](CONFIG-GUIDE.md)
@@ -276,7 +271,6 @@ Claude: 好的，我来执行部署流程...
 
 ## 附录 C：安全说明
 
-- 🔒 **密码不持久化** - 密码仅在内存中使用，不会保存
 - 🔒 **推荐 SSH Agent** - 优先使用 `authMethod: "agent"`
 - 🔒 **配置文件权限** - 确保 `~/.hydrossh/config.json` 权限设置为仅自己可读
 - 🔒 **配置查看过滤** - `ssh_view_config` 工具会自动过滤密码和密钥路径
@@ -310,9 +304,16 @@ npm run format       # 代码格式化
 
 | 工具 | 参数 | 说明 |
 |------|------|------|
-| `ssh_connect` | `serverId`, `timeout?` | 连接服务器 |
+| `ssh_list_servers` | 无 | 列出所有配置的服务器 |
+| `ssh_connect` | `serverId`, `timeout?` | 连接到服务器 |
 | `ssh_exec` | `command`, `connectionId?`, `timeout?`, `cwd?` | 执行命令 |
-| `ssh_get_status` | `connectionId?` | 获取状态（不传返回全部） |
+| `ssh_get_status` | `connectionId?` | 获取连接状态（不传返回全部） |
+| `ssh_disconnect` | `connectionId?` | 断开连接（不传断开最近的一个） |
+| `ssh_add_server` | `id`, `name`, `host`, `username`, `port?`, `authMethod?`, `privateKeyPath?`, `password?` | 添加服务器配置 |
+| `ssh_remove_server` | `serverId` | 删除服务器配置 |
+| `ssh_update_server` | `serverId`, `name?`, `host?`, `port?`, `username?`, `authMethod?`, `privateKeyPath?`, `password?` | 更新服务器配置 |
+| `ssh_view_config` | 无 | 查看配置（过滤敏感信息） |
+| `ssh_help` | `topic?` | 显示帮助信息 |
 
 ---
 
