@@ -1,6 +1,6 @@
 # Configuration Guide
 
-**中文** | [English](CONFIG-GUIDE_EN.md)
+[中文](CONFIG-GUIDE.md) | **English**
 
 ## Configuration File Location
 

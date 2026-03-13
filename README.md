@@ -1,78 +1,75 @@
 # mcp-hydrocoder-ssh
 
-**中文** | [English](README_EN.md)
+[中文](README_CN.md) | **English**
 
-为 Claude Code 提供 SSH 远程连接能力的 MCP 服务器。连接远程服务器、执行命令、自动化部署，无需单独打开 SSH 工具窗口。
+MCP server that provides SSH remote connection capabilities for Claude Code. Connect to remote servers, execute commands, and automate deployments without needing a separate SSH terminal.
 
 [![npm version](https://img.shields.io/npm/v/mcp-hydrocoder-ssh.svg)](https://www.npmjs.com/package/mcp-hydrocoder-ssh)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ---
 
-## 第一部分：功能介绍
+## Part 1: Features
 
-### 这是什么？
+### What is this?
 
-`mcp-hydrocoder-ssh` 是一个 MCP (Model Context Protocol) 服务器，让 Claude Code 能够：
-- 🔌 直接连接远程 SSH 服务器（后台长连接）
-- ⚡ 执行命令并获取完整输出
-- 🔄 保持连接状态，支持多步连续操作
-- 🚀 运行部署脚本（git pull、npm install、systemctl restart 等）
+`mcp-hydrocoder-ssh` is an MCP (Model Context Protocol) server that enables Claude Code to:
+- 🔌 Connect to remote SSH servers directly (persistent background connections)
+- ⚡ Execute commands and get complete output
+- 🔄 Maintain connection state for multi-step operations
+- 🚀 Run deployment scripts (git pull, npm install, systemctl restart, etc.)
 
-### 主要好处
+### Key Benefits
 
-| 好处 | 说明 |
-|------|------|
-| **无需切换窗口** | 在 Claude Code 对话中完成所有远程操作 |
-| **智能部署** | Claude 可根据命令输出自动判断下一步操作 |
-| **多服务器管理** | 同时管理多个服务器配置，快速切换 |
-| **安全认证** | 支持 SSH agent、密钥文件 |
-| **连接池管理** | 保持长连接，避免重复认证和连接开销 |
+| Benefit | Description |
+|---------|-------------|
+| **No window switching** | Complete all remote operations within Claude Code conversation |
+| **Smart deployment** | Claude can auto-determine next steps based on command output |
+| **Multi-server management** | Manage multiple server configs, switch quickly |
+| **Secure authentication** | Support SSH agent, key files |
+| **Connection pooling** | Maintain persistent connections, avoid re-authentication overhead |
 
-### 可用工具
+### Available Tools
 
-**SSH 连接工具 (5 个)：**
-- `ssh_list_servers` - 列出所有配置的服务器
-- `ssh_connect` - 连接到指定服务器
-- `ssh_exec` - 执行命令（支持指定工作目录）
-- `ssh_get_status` - 获取连接状态
-- `ssh_disconnect` - 断开连接
+**SSH Connection Tools (5):**
+- `ssh_list_servers` - List all configured servers
+- `ssh_connect` - Connect to a server
+- `ssh_exec` - Execute commands (with working directory support)
+- `ssh_get_status` - Get connection status
+- `ssh_disconnect` - Disconnect from server
 
-**配置管理工具 (5 个)：**
-- `ssh_add_server` - 添加新服务器配置
-- `ssh_remove_server` - 删除服务器配置
-- `ssh_update_server` - 更新服务器配置
-- `ssh_view_config` - 查看配置（过滤敏感信息）
-- `ssh_help` - 显示帮助信息
+**Configuration Management Tools (5):**
+- `ssh_add_server` - Add new server configuration
+- `ssh_remove_server` - Remove server configuration
+- `ssh_update_server` - Update server configuration
+- `ssh_view_config` - View config (filters sensitive info)
+- `ssh_help` - Show help information
 
 ---
 
-## 第二部分：快速安装（推荐）
+## Part 2: Quick Installation
 
-### 步骤 1：选择安装方式
+### Step 1: Choose Installation Method
 
-**方式 A：全局安装（推荐）**
+**Option A: Global Installation (Recommended)**
 
 ```bash
 npm install -g mcp-hydrocoder-ssh
 ```
 
-**方式 B：使用 npx（无需安装）**
+**Option B: Using npx (No installation required)**
 
 ```bash
-# 无需执行任何命令，直接在配置中使用 npx
+# No action needed - use npx directly in config
 ```
 
 ---
 
-### 步骤 2：配置 Claude Code
+### Step 2: Configure Claude Code
 
-编辑用户目录的 `~/.claude.json` 文件：
+Edit `~/.claude.json` in your user directory:
 
-**Windows 路径：** `C:\Users\<你的用户名>\.claude.json`
-**macOS/Linux 路径：** `~/.claude.json`
-
-**方式 A（全局安装）的配置：**
+**Option A (Global Install):**
 ```json
 {
   "mcpServers": {
@@ -83,7 +80,7 @@ npm install -g mcp-hydrocoder-ssh
 }
 ```
 
-**方式 B（npx）的配置：**
+**Option B (npx):**
 ```json
 {
   "mcpServers": {
@@ -95,113 +92,106 @@ npm install -g mcp-hydrocoder-ssh
 }
 ```
 
-> **注意：**
-> - `hydrossh` 是服务器名称标识，可以改为任意你喜欢的名字。
-> - `-y` 标志让 npx 自动确认安装，避免交互提示卡住。
+> **Note:**
+> - `hydrossh` is the server identifier, can be changed to any name you prefer.
+> - `-y` flag lets npx auto-confirm installation, avoiding interactive prompts.
 
-### 步骤 3：重启 Claude Code
+### Step 3: Restart Claude Code
 
-关闭并重新打开 Claude Code，配置将自动加载。
+Close and reopen Claude Code to load the configuration.
 
-### 步骤 4：验证安装
+### Step 4: Verify Installation
 
-在 Claude Code 中输入：
+In Claude Code, enter:
 ```
-列出可用的 SSH 服务器
+List available SSH servers
 ```
 
-如果看到服务器列表（空列表表示尚未配置），说明安装成功。你可以通过自然语言让 Claude 帮你添加配置、修改配置或连接服务器，连接后可以执行各种操作。
+If you see a server list (empty list means no servers configured yet), the installation was successful. You can use natural language to add configs, modify configs, or connect to servers.
 
 ---
 
-## 第三部分：源码使用（开发方式）
+## Part 3: Using from Source Code
 
-### 1. 下载源码
+### 1. Clone Repository
 
 ```bash
 git clone https://github.com/hydroCoderClaud/mcpHydroSSH.git
 cd mcpHydroSSH
 ```
 
-### 2. 安装依赖
+### 2. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 3. 编译构建
+### 3. Build
 
 ```bash
 npm run build
 ```
 
-编译输出到 `dist/` 目录，主要文件：
-- `dist/index.js` - MCP 服务器入口
-- `dist/ssh-manager.js` - SSH 连接管理
-- `dist/config.js` - 配置管理
+Build output goes to `dist/` directory:
+- `dist/index.js` - MCP server entry point
+- `dist/ssh-manager.js` - SSH connection management
+- `dist/config.js` - Configuration management
 
-### 4. 配置 Claude Code
+### 4. Configure Claude Code
 
-编辑用户目录的 `~/.claude.json` 文件：
-
-**Windows 路径：** `C:\Users\<你的用户名>\.claude.json`
-**macOS/Linux 路径：** `~/.claude.json`
+Edit `~/.claude.json` in your user directory:
 
 ```json
 {
   "mcpServers": {
     "hydrossh": {
       "command": "node",
-      "args": ["<项目绝对路径>/dist/index.js"]
+      "args": ["<absolute-path>/dist/index.js"]
     }
   }
 }
 ```
 
-> **注意：** 将 `<项目绝对路径>` 替换为你实际的源码目录绝对路径。
-> - Windows 示例：`C:\\workspace\\develop\\ccExtensions\\mcpHydroSSH`
-> - macOS/Linux 示例：`/home/user/projects/mcpHydroSSH`
+> **Note:** Replace `<absolute-path>` with your actual source directory absolute path.
 
-### 5. 重启 Claude Code
+### 5. Restart Claude Code
 
-关闭并重新打开 Claude Code，配置将自动加载。
+Close and reopen Claude Code to load the configuration.
 
-### 6. 开发模式（可选）
+### 6. Development Mode (Optional)
 
-如需热重载开发：
+For hot-reload development:
 ```bash
 npm run dev
 ```
 
-此时 Claude Code 配置改为：
+Then configure Claude Code with:
 
 ```json
 {
   "mcpServers": {
     "hydrossh": {
       "command": "npx",
-      "args": ["tsx", "<项目绝对路径>/src/index.ts"]
+      "args": ["tsx", "<absolute-path>/src/index.ts"]
     }
   }
 }
 ```
 
-> **注意：** 将 `<项目绝对路径>` 替换为你实际的源码目录绝对路径。
-
 ---
 
-## 附录 A：配置 SSH 服务器
+## Appendix A: SSH Configuration
 
-首次运行时，服务器会自动创建配置文件 `~/.hydrossh/config.json`。
+Configuration file location: `~/.claude/ssh-mcp-config.json`
 
-### 配置示例
+### Configuration Example
 
 ```json
 {
   "servers": [
     {
       "id": "prod-server",
-      "name": "生产服务器",
+      "name": "Production Server",
       "host": "example.com",
       "port": 22,
       "username": "deploy",
@@ -209,7 +199,7 @@ npm run dev
     },
     {
       "id": "test-server",
-      "name": "测试服务器",
+      "name": "Test Server",
       "host": "test.example.com",
       "username": "ubuntu",
       "authMethod": "key",
@@ -226,97 +216,97 @@ npm run dev
 }
 ```
 
-### 认证方式
+### Authentication Methods
 
-| 方式 | 配置 | 说明 |
-|------|------|------|
-| **SSH Agent** | `"authMethod": "agent"` | 推荐，使用系统 SSH agent |
-| **密钥文件** | `"authMethod": "key", "privateKeyPath": "~/.ssh/id_rsa"` | 默认，直接读取密钥文件 |
-| **密码** | `"authMethod": "password", "password": "xxx"` | 不推荐，密码会明文存储 |
+| Method | Configuration | Description |
+|--------|---------------|-------------|
+| **SSH Agent** | `"authMethod": "agent"` | Recommended, uses system SSH agent |
+| **Key File** | `"authMethod": "key", "privateKeyPath": "~/.ssh/id_rsa"` | Default, reads private key file |
+| **Password** | `"authMethod": "password", "password": "xxx"` | Not recommended, password stored in plaintext |
 
-详见 [CONFIG-GUIDE.md](CONFIG-GUIDE.md)
+See [CONFIG-GUIDE_EN.md](CONFIG-GUIDE_EN.md) for details.
 
 ---
 
-## 附录 B：使用示例
+## Appendix B: Usage Examples
 
-### 基本用法
-
-```
-用户：列出可用的服务器
-Claude: 发现 2 个配置的服务器：prod-server、test-server
-
-用户：连接到 prod-server
-Claude: [调用 ssh_connect] 连接成功！connectionId: xxx
-
-用户：执行命令：uptime
-Claude: [调用 ssh_exec] 返回：up 30 days, 2 users, load average: 0.1, 0.2, 0.5
-
-用户：断开连接
-Claude: [调用 ssh_disconnect] 已断开
-```
-
-### 自动化部署
+### Basic Usage
 
 ```
-用户：部署最新代码到生产服务器
-Claude: 好的，我来执行部署流程...
-1. 连接 prod-server
+User: List available servers
+Claude: Found 2 configured servers: prod-server, test-server
+
+User: Connect to prod-server
+Claude: [ssh_connect] Connected! connectionId: xxx
+
+User: Execute command: uptime
+Claude: [ssh_exec] Returns: up 30 days, 2 users, load average: 0.1, 0.2, 0.5
+
+User: Disconnect
+Claude: [ssh_disconnect] Disconnected
+```
+
+### Automated Deployment
+
+```
+User: Deploy latest code to production server
+Claude: Okay, I'll execute the deployment flow...
+1. Connect to prod-server
 2. cd /opt/myapp && git pull
 3. npm ci --production
 4. sudo systemctl restart myapp
-5. 检查服务状态
-6. 断开连接
-部署完成！
+5. Check service status
+6. Disconnect
+Deployment complete!
 ```
 
 ---
 
-## 附录 C：安全说明
+## Appendix C: Security Notes
 
-- 🔒 **推荐 SSH Agent** - 优先使用 `authMethod: "agent"`
-- 🔒 **配置文件权限** - 确保 `~/.hydrossh/config.json` 权限设置为仅自己可读
-- 🔒 **配置查看过滤** - `ssh_view_config` 工具会自动过滤密码和密钥路径
-
----
-
-## 附录 D：故障排查
-
-| 问题 | 解决方案 |
-|------|---------|
-| SSH Agent 未运行 | Windows: 启动 "OpenSSH Authentication Agent" 服务 |
-| 连接超时 | 检查服务器地址、端口、网络连通性 |
-| 命令未找到 | 确认 npm 全局安装成功，或检查 PATH 环境变量 |
-| 配置未加载 | 检查 `~/.claude.json` 格式是否正确 |
+- 🔒 **SSH Agent Recommended** - Prefer `authMethod: "agent"`
+- 🔒 **Config File Permissions** - Ensure `~/.claude/ssh-mcp-config.json` is readable only by you
+- 🔒 **Config Viewing** - `ssh_view_config` tool automatically filters passwords and key paths
 
 ---
 
-## 附录 E：命令参考
+## Appendix D: Troubleshooting
 
-### 开发命令
+| Issue | Solution |
+|-------|----------|
+| SSH Agent not running | Windows: Start "OpenSSH Authentication Agent" service |
+| Connection timeout | Check server address, port, network connectivity |
+| Command not found | Verify npm global install or check PATH environment variable |
+| Config not loaded | Check if `~/.claude.json` format is correct |
+
+---
+
+## Appendix E: Command Reference
+
+### Development Commands
 
 ```bash
-npm run build        # 编译构建
-npm run dev          # 开发模式（热重载）
-npm test             # 运行测试
-npm run lint         # 代码检查
-npm run format       # 代码格式化
+npm run build        # Build TypeScript
+npm run dev          # Development mode (hot reload)
+npm test             # Run tests
+npm run lint         # Code linting
+npm run format       # Code formatting
 ```
 
-### MCP 工具参数
+### MCP Tool Parameters
 
-| 工具 | 参数 | 说明 |
-|------|------|------|
-| `ssh_list_servers` | 无 | 列出所有配置的服务器 |
-| `ssh_connect` | `serverId`, `timeout?` | 连接到服务器 |
-| `ssh_exec` | `command`, `connectionId?`, `timeout?`, `cwd?` | 执行命令 |
-| `ssh_get_status` | `connectionId?` | 获取连接状态（不传返回全部） |
-| `ssh_disconnect` | `connectionId?` | 断开连接（不传断开最近的一个） |
-| `ssh_add_server` | `id`, `name`, `host`, `username`, `port?`, `authMethod?`, `privateKeyPath?`, `password?` | 添加服务器配置 |
-| `ssh_remove_server` | `serverId` | 删除服务器配置 |
-| `ssh_update_server` | `serverId`, `name?`, `host?`, `port?`, `username?`, `authMethod?`, `privateKeyPath?`, `password?` | 更新服务器配置 |
-| `ssh_view_config` | 无 | 查看配置（过滤敏感信息） |
-| `ssh_help` | `topic?` | 显示帮助信息 |
+| Tool | Parameters | Description |
+|------|------------|-------------|
+| `ssh_list_servers` | none | List all configured servers |
+| `ssh_connect` | `serverId`, `timeout?` | Connect to server |
+| `ssh_exec` | `command`, `connectionId?`, `timeout?`, `cwd?` | Execute command |
+| `ssh_get_status` | `connectionId?` | Get connection status (all if not specified) |
+| `ssh_disconnect` | `connectionId?` | Disconnect (most recent if not specified) |
+| `ssh_add_server` | `id`, `name`, `host`, `username`, `port?`, `authMethod?`, `privateKeyPath?`, `password?` | Add server config |
+| `ssh_remove_server` | `serverId` | Remove server config |
+| `ssh_update_server` | `serverId`, `name?`, `host?`, `port?`, `username?`, `authMethod?`, `privateKeyPath?`, `password?` | Update server config |
+| `ssh_view_config` | none | View config (filters sensitive info) |
+| `ssh_help` | `topic?` | Show help information |
 
 ---
 
