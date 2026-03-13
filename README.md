@@ -216,6 +216,7 @@ npm run dev
   ],
   "settings": {
     "defaultConnectTimeout": 30000,
+    "defaultKeepaliveInterval": 60000,
     "commandTimeout": 60000,
     "maxConnections": 5,
     "logCommands": true
