@@ -47,11 +47,21 @@
 
 ## 第二部分：快速安装（推荐）
 
-### 步骤 1：安装 npm 包
+### 步骤 1：选择安装方式
+
+**方式 A：全局安装（推荐）**
 
 ```bash
 npm install -g mcp-hydrocoder-ssh
 ```
+
+**方式 B：使用 npx（无需安装）**
+
+```bash
+# 无需执行任何命令，直接在配置中使用 npx
+```
+
+---
 
 ### 步骤 2：配置 Claude Code
 
@@ -60,13 +70,24 @@ npm install -g mcp-hydrocoder-ssh
 **Windows 路径：** `C:\Users\<你的用户名>\.claude.json`
 **macOS/Linux 路径：** `~/.claude.json`
 
-在 `mcpServers` 中添加以下配置：
-
+**方式 A（全局安装）的配置：**
 ```json
 {
   "mcpServers": {
     "hydrossh": {
       "command": "mcp-hydrocoder-ssh"
+    }
+  }
+}
+```
+
+**方式 B（npx）的配置：**
+```json
+{
+  "mcpServers": {
+    "hydrossh": {
+      "command": "npx",
+      "args": ["-y", "mcp-hydrocoder-ssh"]
     }
   }
 }
@@ -78,13 +99,16 @@ npm install -g mcp-hydrocoder-ssh
   "theme": "dark",
   "mcpServers": {
     "hydrossh": {
-      "command": "mcp-hydrocoder-ssh"
+      "command": "npx",
+      "args": ["-y", "mcp-hydrocoder-ssh"]
     }
   }
 }
 ```
 
-> **注意：** `hydrossh` 是服务器名称标识，可以改为任意你喜欢的名字。
+> **注意：**
+> - `hydrossh` 是服务器名称标识，可以改为任意你喜欢的名字。
+> - `-y` 标志让 npx 自动确认安装，避免交互提示卡住。
 
 ### 步骤 3：重启 Claude Code
 
