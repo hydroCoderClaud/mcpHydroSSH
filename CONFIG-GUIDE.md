@@ -6,8 +6,11 @@
 
 配置文件位于用户目录：
 ```
-~/.claude/ssh-mcp-config.json
+~/.hydrossh/config.json
 ```
+
+**首次运行自动创建：** 首次启动 MCP 服务器时，会自动创建 `~/.hydrossh/` 目录和配置文件。
+
 **适用场景**：个人常用服务器，所有项目共享
 
 ---

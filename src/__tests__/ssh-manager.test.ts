@@ -15,8 +15,8 @@ describe('SSHManager', () => {
     });
   });
 
-  afterEach(async () => {
-    await manager.cleanup();
+  afterEach(() => {
+    manager.cleanup();
   });
 
   describe('constructor', () => {
@@ -97,7 +97,7 @@ describe('SSHManager', () => {
       // All should fail due to timeout or connection limit
       expect(results.filter(r => r === 'failed').length).toBeGreaterThan(0);
 
-      await limitedManager.cleanup();
+      limitedManager.cleanup();
     });
   });
 

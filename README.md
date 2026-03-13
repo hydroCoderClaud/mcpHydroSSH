@@ -47,46 +47,36 @@ MCP server that provides SSH remote connection capabilities for Claude Code. Con
 
 ---
 
-## Part 2: Quick Installation
+## Part 2: Installation
 
-### Step 1: Choose Installation Method
+### One-Line Installation (Easiest, Recommended)
 
-**Option A: Global Installation (Recommended)**
+```bash
+claude mcp add hydrossh npx mcp-hydrocoder-ssh@latest
+```
+
+Restart Claude Code and you're done!
+
+### Option 2: Global Installation
 
 ```bash
 npm install -g mcp-hydrocoder-ssh
+claude mcp add hydrossh mcp-hydrocoder-ssh
 ```
 
-**Option B: Using npx (No installation required)**
+### Option 3: Manual JSON Configuration
 
-```bash
-# No action needed - use npx directly in config
-```
+Edit `~/.claude.json`:
 
----
+**Windows path:** `C:\Users\<YourUsername>\.claude.json`
+**macOS/Linux path:** `~/.claude.json`
 
-### Step 2: Configure Claude Code
-
-Edit `~/.claude.json` in your user directory:
-
-**Option A (Global Install):**
-```json
-{
-  "mcpServers": {
-    "hydrossh": {
-      "command": "mcp-hydrocoder-ssh"
-    }
-  }
-}
-```
-
-**Option B (npx):**
 ```json
 {
   "mcpServers": {
     "hydrossh": {
       "command": "npx",
-      "args": ["-y", "mcp-hydrocoder-ssh"]
+      "args": ["-y", "mcp-hydrocoder-ssh@latest"]
     }
   }
 }
@@ -96,18 +86,14 @@ Edit `~/.claude.json` in your user directory:
 > - `hydrossh` is the server identifier, can be changed to any name you prefer.
 > - `-y` flag lets npx auto-confirm installation, avoiding interactive prompts.
 
-### Step 3: Restart Claude Code
-
-Close and reopen Claude Code to load the configuration.
-
-### Step 4: Verify Installation
+### Verify Installation
 
 In Claude Code, enter:
 ```
 List available SSH servers
 ```
 
-If you see a server list (empty list means no servers configured yet), the installation was successful. You can use natural language to add configs, modify configs, or connect to servers.
+If you see a server list (empty list means no servers configured yet), the installation was successful.
 
 ---
 
@@ -139,7 +125,7 @@ Build output goes to `dist/` directory:
 
 ### 4. Configure Claude Code
 
-Edit `~/.claude.json` in your user directory:
+Edit `~/.claude.json`:
 
 ```json
 {
@@ -156,7 +142,7 @@ Edit `~/.claude.json` in your user directory:
 
 ### 5. Restart Claude Code
 
-Close and reopen Claude Code to load the configuration.
+Close and reopen Claude Code.
 
 ### 6. Development Mode (Optional)
 
@@ -182,7 +168,13 @@ Then configure Claude Code with:
 
 ## Appendix A: SSH Configuration
 
-Configuration file location: `~/.claude/ssh-mcp-config.json`
+Configuration file location: `~/.hydrossh/config.json`
+
+**Auto-created on first run:** The `~/.hydrossh/` directory and config file are automatically created when the MCP server first starts.
+
+### Quick Add via Claude Code
+
+After installation, you can add server configs using natural language commands.
 
 ### Configuration Example
 
@@ -265,7 +257,7 @@ Deployment complete!
 ## Appendix C: Security Notes
 
 - 🔒 **SSH Agent Recommended** - Prefer `authMethod: "agent"`
-- 🔒 **Config File Permissions** - Ensure `~/.claude/ssh-mcp-config.json` is readable only by you
+- 🔒 **Config File Permissions** - Ensure `~/.hydrossh/config.json` is readable only by you
 - 🔒 **Config Viewing** - `ssh_view_config` tool automatically filters passwords and key paths
 
 ---
@@ -278,6 +270,7 @@ Deployment complete!
 | Connection timeout | Check server address, port, network connectivity |
 | Command not found | Verify npm global install or check PATH environment variable |
 | Config not loaded | Check if `~/.claude.json` format is correct |
+| Config file not found | Auto-created on first run, or manually create `~/.hydrossh/config.json` |
 
 ---
 

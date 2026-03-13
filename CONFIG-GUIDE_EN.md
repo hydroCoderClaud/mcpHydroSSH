@@ -6,8 +6,11 @@
 
 The configuration file is located in the user directory:
 ```
-~/.claude/ssh-mcp-config.json
+~/.hydrossh/config.json
 ```
+
+**Auto-created on first run:** The `~/.hydrossh/` directory and config file are automatically created when the MCP server first starts.
+
 **Use case**: Personal frequently-used servers, shared across all projects
 
 ---

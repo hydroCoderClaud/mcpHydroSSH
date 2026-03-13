@@ -47,49 +47,36 @@
 
 ---
 
-## 第二部分：快速安装（推荐）
+## 第二部分：安装
 
-### 步骤 1：选择安装方式
+### 一键安装（最简单，推荐）
 
-**方式 A：全局安装（推荐）**
+```bash
+claude mcp add hydrossh npx mcp-hydrocoder-ssh@latest
+```
+
+重启 Claude Code 即可完成安装！
+
+### 方式二：全局安装
 
 ```bash
 npm install -g mcp-hydrocoder-ssh
+claude mcp add hydrossh mcp-hydrocoder-ssh
 ```
 
-**方式 B：使用 npx（无需安装）**
+### 方式三：手动配置 JSON
 
-```bash
-# 无需执行任何命令，直接在配置中使用 npx
-```
-
----
-
-### 步骤 2：配置 Claude Code
-
-编辑用户目录的 `~/.claude.json` 文件：
+编辑 `~/.claude.json` 文件：
 
 **Windows 路径：** `C:\Users\<你的用户名>\.claude.json`
 **macOS/Linux 路径：** `~/.claude.json`
 
-**方式 A（全局安装）的配置：**
-```json
-{
-  "mcpServers": {
-    "hydrossh": {
-      "command": "mcp-hydrocoder-ssh"
-    }
-  }
-}
-```
-
-**方式 B（npx）的配置：**
 ```json
 {
   "mcpServers": {
     "hydrossh": {
       "command": "npx",
-      "args": ["-y", "mcp-hydrocoder-ssh"]
+      "args": ["-y", "mcp-hydrocoder-ssh@latest"]
     }
   }
 }
@@ -99,24 +86,20 @@ npm install -g mcp-hydrocoder-ssh
 > - `hydrossh` 是服务器名称标识，可以改为任意你喜欢的名字。
 > - `-y` 标志让 npx 自动确认安装，避免交互提示卡住。
 
-### 步骤 3：重启 Claude Code
-
-关闭并重新打开 Claude Code，配置将自动加载。
-
-### 步骤 4：验证安装
+### 验证安装
 
 在 Claude Code 中输入：
 ```
 列出可用的 SSH 服务器
 ```
 
-如果看到服务器列表（空列表表示尚未配置），说明安装成功。你可以通过自然语言让 Claude 帮你添加配置、修改配置或连接服务器，连接后可以执行各种操作。
+如果看到服务器列表（空列表表示尚未配置），说明安装成功。
 
 ---
 
 ## 第三部分：源码使用（开发方式）
 
-### 1. 下载源码
+### 1. 克隆仓库
 
 ```bash
 git clone https://github.com/hydroCoderClaud/mcpHydroSSH.git
@@ -142,10 +125,7 @@ npm run build
 
 ### 4. 配置 Claude Code
 
-编辑用户目录的 `~/.claude.json` 文件：
-
-**Windows 路径：** `C:\Users\<你的用户名>\.claude.json`
-**macOS/Linux 路径：** `~/.claude.json`
+编辑 `~/.claude.json` 文件：
 
 ```json
 {
@@ -164,7 +144,7 @@ npm run build
 
 ### 5. 重启 Claude Code
 
-关闭并重新打开 Claude Code，配置将自动加载。
+关闭并重新打开 Claude Code。
 
 ### 6. 开发模式（可选）
 
@@ -186,13 +166,17 @@ npm run dev
 }
 ```
 
-> **注意：** 将 `<项目绝对路径>` 替换为你实际的源码目录绝对路径。
-
 ---
 
 ## 附录 A：配置 SSH 服务器
 
-首次运行时，服务器会自动创建配置文件 `~/.hydrossh/config.json`。
+配置文件位置：`~/.hydrossh/config.json`
+
+**首次运行自动创建：** 首次启动 MCP 服务器时，会自动创建 `~/.hydrossh/` 目录和配置文件。
+
+### 快速添加服务器
+
+安装成功后，可以直接用自然语言让 Claude 帮你添加服务器配置。
 
 ### 配置示例
 
@@ -288,6 +272,7 @@ Claude: 好的，我来执行部署流程...
 | 连接超时 | 检查服务器地址、端口、网络连通性 |
 | 命令未找到 | 确认 npm 全局安装成功，或检查 PATH 环境变量 |
 | 配置未加载 | 检查 `~/.claude.json` 格式是否正确 |
+| 配置文件不存在 | 首次运行时自动创建，或手动创建 `~/.hydrossh/config.json` |
 
 ---
 
