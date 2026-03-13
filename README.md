@@ -59,7 +59,7 @@ In Claude Code, simply say:
 | `ssh_list_servers` | List all configured servers |
 | `ssh_connect` | Connect to a server |
 | `ssh_exec` | Execute a command |
-| `ssh_get_status` | Get connection status |
+| `ssh_get_status` | Get connection status (or all statuses) |
 | `ssh_disconnect` | Disconnect from server |
 
 ### Config Management Tools
@@ -69,6 +69,8 @@ In Claude Code, simply say:
 | `ssh_add_server` | Add a new server to config |
 | `ssh_remove_server` | Remove a server from config |
 | `ssh_update_server` | Update an existing server config |
+| `ssh_view_config` | View full configuration (sanitized) |
+| `ssh_help` | Show help and usage examples |
 
 ## License
 
