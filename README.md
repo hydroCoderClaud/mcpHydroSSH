@@ -93,19 +93,6 @@ npm install -g mcp-hydrocoder-ssh
 }
 ```
 
-**完整示例：**
-```json
-{
-  "theme": "dark",
-  "mcpServers": {
-    "hydrossh": {
-      "command": "npx",
-      "args": ["-y", "mcp-hydrocoder-ssh"]
-    }
-  }
-}
-```
-
 > **注意：**
 > - `hydrossh` 是服务器名称标识，可以改为任意你喜欢的名字。
 > - `-y` 标志让 npx 自动确认安装，避免交互提示卡住。
