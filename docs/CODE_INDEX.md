@@ -2,30 +2,37 @@
 
 本文档提供代码库的快速导航和索引。
 
+**版本**: 0.1.0
+**更新日期**: 2026-03-13
+
+---
+
 ## 目录结构
 
 ```
 mcpHydroSSH/
 ├── src/
-│   ├── index.ts              # MCP 服务器入口 (725 行)
-│   ├── ssh-manager.ts        # SSH 连接管理 (350 行)
-│   ├── config.ts             # 配置管理 (204 行)
-│   ├── types.ts              # TypeScript 类型定义 (66 行)
+│   ├── index.ts              # MCP 服务器入口 (724 行)
+│   ├── ssh-manager.ts        # SSH 连接管理 (349 行)
+│   ├── config.ts             # 配置管理 (203 行)
+│   ├── types.ts              # TypeScript 类型定义 (65 行)
 │   └── __tests__/
 │       ├── config.test.ts    # 配置测试 (252 行)
 │       └── ssh-manager.test.ts # SSH 管理器测试 (162 行)
 ├── docs/
 │   ├── design.md             # 设计文档
 │   └── CODE_INDEX.md         # 本文档
-├── .gitignore
-├── README.md
-├── example-config.json
+├── README.md                 # 英文 README（默认）
+├── README_CN.md              # 中文 README
+├── CONFIG-GUIDE.md           # 中文配置指南
+├── CONFIG-GUIDE_EN.md        # 英文配置指南
+├── example-config.json       # 配置示例
 ├── package.json
 ├── tsconfig.json
-├── vitest.config.json
-├── .eslintrc.json
-└── .prettierrc
+└── vitest.config.json
 ```
+
+**总代码量**: 约 1755 行（含测试）
 
 ---
 
@@ -33,7 +40,7 @@ mcpHydroSSH/
 
 ### 1. src/index.ts - MCP 服务器入口
 
-**行数**: 725 行
+**行数**: 724 行
 **职责**: MCP 服务器主入口，注册所有工具处理器
 
 #### 主要功能
@@ -98,7 +105,7 @@ catch (err: unknown) {
 
 ### 2. src/ssh-manager.ts - SSH 连接管理器
 
-**行数**: 350 行
+**行数**: 349 行
 **职责**: 管理 SSH 连接池、执行命令、状态跟踪
 
 #### 类结构
@@ -168,16 +175,11 @@ const timeout = setTimeout(() => {
 }, timeoutMs);
 ```
 
-**自动重连准备** (84):
-```typescript
-serverConfig: { ...serverConfig },  // Store for auto-reconnect
-```
-
 ---
 
 ### 3. src/config.ts - 配置管理
 
-**行数**: 204 行
+**行数**: 203 行
 **职责**: 加载、验证、保存配置文件
 
 #### 函数索引
@@ -229,7 +231,7 @@ try {
 
 ### 4. src/types.ts - TypeScript 类型定义
 
-**行数**: 66 行
+**行数**: 65 行
 **职责**: 定义所有 TypeScript 接口
 
 #### 接口列表
@@ -393,21 +395,6 @@ export interface SSHConnection {
 
 ---
 
-## JSDoc 注释
-
-所有公共方法都有完整的 JSDoc 注释:
-
-**ssh-manager.ts**:
-- `@param` - 参数说明
-- `@returns` - 返回值说明
-- `@throws` - 抛出错误说明
-
-**config.ts**:
-- 所有导出函数都有完整文档
-- 包含使用示例
-
----
-
 ## 快速查找
 
 ### 按功能查找
@@ -439,4 +426,4 @@ export interface SSHConnection {
 
 | 版本 | 日期 | 变更 |
 |------|------|------|
-| 0.1.0 | 2026-03-12 | 初始版本，MVP 功能完整 |
+| 0.1.0 | 2026-03-13 | 初始版本，10 个 MCP 工具完整 |
