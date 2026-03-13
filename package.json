@@ -1,9 +1,21 @@
 {
-  "name": "mcp-hydro-ssh",
+  "name": "mcp-hydrocoder-ssh",
   "version": "0.1.0",
   "description": "SSH MCP Server for Claude Code",
   "type": "module",
   "main": "dist/index.js",
+  "bin": {
+    "mcp-hydrocoder-ssh": "./dist/index.js"
+  },
+  "files": [
+    "dist/index.js",
+    "dist/ssh-manager.js",
+    "dist/config.js",
+    "dist/types.js",
+    "example-config.json",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsx watch src/index.ts",

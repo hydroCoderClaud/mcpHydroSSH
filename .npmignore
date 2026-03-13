@@ -1,0 +1,36 @@
+# Test files
+dist/__tests__/
+*.test.js
+*.test.ts
+test/
+
+# Config files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+
+# Environment
+.env
+.env.local
+
+# Git
+.git/
+.gitignore
+
+# Docs (not needed for npm users)
+docs/
+CLAUDE.md
+CONFIG-GUIDE.md
+TESTING.md
+
+# Development
+src/
+tsconfig.json
+vitest.config.json
+.eslintrc.json
+.prettierrc

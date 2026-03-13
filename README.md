@@ -1,14 +1,13 @@
-# mcpHydroSSH
+# mcp-hydrocoder-ssh
 
 SSH MCP Server for Claude Code - connect to remote servers directly from Claude Code.
 
 ## Quick Start
 
-### 1. Install & Build
+### 1. Install from npm
 
 ```bash
-npm install
-npm run build
+npm install -g mcp-hydrocoder-ssh
 ```
 
 ### 2. Configure Servers
@@ -35,8 +34,8 @@ Add to your Claude Code settings (`~/.claude.json`):
 {
   "mcpServers": {
     "hydrossh": {
-      "command": "node",
-      "args": ["C:\\workspace\\develop\\ccExtensions\\mcpHydroSSH\\dist\\index.js"]
+      "command": "npx",
+      "args": ["mcp-hydrocoder-ssh"]
     }
   }
 }
@@ -47,14 +46,15 @@ Add to your Claude Code settings (`~/.claude.json`):
 {
   "mcpServers": {
     "hydrossh": {
-      "command": "node",
-      "args": ["/path/to/mcpHydroSSH/dist/index.js"]
+      "command": "npx",
+      "args": ["mcp-hydrocoder-ssh"]
     }
   }
 }
 ```
 
 > **Note:** The server name `hydrossh` is used to avoid conflicts with other SSH-related MCP servers.
+> For global install: use `"command": "mcp-hydrocoder-ssh"` (no npx needed).
 
 ### 4. Usage
 
