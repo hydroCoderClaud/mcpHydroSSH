@@ -1,6 +1,6 @@
 # mcp-hydrocoder-ssh
 
-**中文** | [English](README.md) | [Configuration Guide](CONFIG-GUIDE_EN.md) | [配置指南](CONFIG-GUIDE.md)
+**中文** | [English](https://github.com/hydroCoderClaud/mcpHydroSSH/blob/main/README.md) | [Configuration Guide](https://github.com/hydroCoderClaud/mcpHydroSSH/blob/main/CONFIG-GUIDE_EN.md) | [配置指南](https://github.com/hydroCoderClaud/mcpHydroSSH/blob/main/CONFIG-GUIDE.md)
 
 为 Claude Code 提供 SSH 远程连接能力的 MCP 服务器。连接远程服务器、执行命令、自动化部署，无需单独打开 SSH 工具窗口。
 

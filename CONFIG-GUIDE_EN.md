@@ -1,6 +1,6 @@
 # Configuration Guide
 
-[README 中文](README_CN.md) | [README English](README.md) | [中文](CONFIG-GUIDE.md) | **English**
+[README 中文](https://github.com/hydroCoderClaud/mcpHydroSSH/blob/main/README_CN.md) | [README English](https://github.com/hydroCoderClaud/mcpHydroSSH/blob/main/README.md) | [中文](https://github.com/hydroCoderClaud/mcpHydroSSH/blob/main/CONFIG-GUIDE.md) | **English**
 
 ## Configuration File Location
 
