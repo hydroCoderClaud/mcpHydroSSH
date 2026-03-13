@@ -1,9 +1,5 @@
 # 配置指南
 
-## 快速开始
-
-复制 `example-config.json` 并重命名为 `ssh-mcp-config.json`，然后编辑配置你的服务器。
-
 ## 配置文件位置
 
 配置文件位于用户目录：
