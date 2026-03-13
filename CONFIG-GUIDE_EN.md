@@ -1,6 +1,6 @@
 # Configuration Guide
 
-[中文](CONFIG-GUIDE.md) | [English](CONFIG-GUIDE_EN.md) | [README](README.md) | [中文 README](README_CN.md)
+[README 中文](README_CN.md) | [README English](README.md) | [中文](CONFIG-GUIDE.md) | **English**
 
 ## Configuration File Location
 
