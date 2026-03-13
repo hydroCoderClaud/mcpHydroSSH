@@ -14,6 +14,9 @@
     "dist/types.js",
     "example-config.json",
     "README.md",
+    "README_CN.md",
+    "CONFIG-GUIDE.md",
+    "CONFIG-GUIDE_EN.md",
     "LICENSE"
   ],
   "scripts": {
