@@ -30,16 +30,31 @@ See [CONFIG-GUIDE.md](CONFIG-GUIDE.md) for detailed configuration options.
 
 Add to your Claude Code settings (`~/.claude.json`):
 
+**Windows:**
 ```json
 {
   "mcpServers": {
-    "ssh": {
+    "hydrossh": {
       "command": "node",
       "args": ["C:\\workspace\\develop\\ccExtensions\\mcpHydroSSH\\dist\\index.js"]
     }
   }
 }
 ```
+
+**macOS/Linux:**
+```json
+{
+  "mcpServers": {
+    "hydrossh": {
+      "command": "node",
+      "args": ["/path/to/mcpHydroSSH/dist/index.js"]
+    }
+  }
+}
+```
+
+> **Note:** The server name `hydrossh` is used to avoid conflicts with other SSH-related MCP servers.
 
 ### 4. Usage
 
