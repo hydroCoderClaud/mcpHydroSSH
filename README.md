@@ -1,5 +1,7 @@
 # mcp-hydrocoder-ssh
 
+**中文** | [English](README_EN.md)
+
 为 Claude Code 提供 SSH 远程连接能力的 MCP 服务器。连接远程服务器、执行命令、自动化部署，无需单独打开 SSH 工具窗口。
 
 [![npm version](https://img.shields.io/npm/v/mcp-hydrocoder-ssh.svg)](https://www.npmjs.com/package/mcp-hydrocoder-ssh)
