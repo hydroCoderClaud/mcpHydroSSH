@@ -49,42 +49,36 @@
 
 ## 第二部分：安装
 
-### 一键安装（最简单，推荐）
+### 方式 1: 程序全局安装 + 配置用户级（推荐）
 
 ```bash
-claude mcp add hydrossh npx mcp-hydrocoder-ssh@latest
+npm install -g mcp-hydrocoder-ssh
+claude mcp add -s user hydrossh mcp-hydrocoder-ssh
 ```
 
-重启 Claude Code 即可完成安装！
+### 方式 2: 程序不安装 + 配置用户级
 
-### 方式二：全局安装
+```bash
+claude mcp add -s user hydrossh npx mcp-hydrocoder-ssh@latest
+```
+
+### 方式 3: 程序全局安装 + 配置项目级
 
 ```bash
 npm install -g mcp-hydrocoder-ssh
 claude mcp add hydrossh mcp-hydrocoder-ssh
 ```
 
-### 方式三：手动配置 JSON
+### 方式 4: 程序不安装 + 配置项目级
 
-编辑 `~/.claude.json` 文件：
-
-**Windows 路径：** `C:\Users\<你的用户名>\.claude.json`
-**macOS/Linux 路径：** `~/.claude.json`
-
-```json
-{
-  "mcpServers": {
-    "hydrossh": {
-      "command": "npx",
-      "args": ["-y", "mcp-hydrocoder-ssh@latest"]
-    }
-  }
-}
+```bash
+claude mcp add hydrossh npx mcp-hydrocoder-ssh@latest
 ```
 
-> **注意：**
-> - `hydrossh` 是服务器名称标识，可以改为任意你喜欢的名字。
-> - `-y` 标志让 npx 自动确认安装，避免交互提示卡住。
+> **说明：**
+> - `-s user` 标志表示配置用户级 MCP，对所有项目生效
+> - 不使用 `-s user` 则为项目级配置，仅对当前项目生效
+> - 使用 `npx` 方式无需预先安装 npm 包
 
 ### 验证安装
 

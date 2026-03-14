@@ -49,42 +49,36 @@ MCP server that provides SSH remote connection capabilities for Claude Code. Con
 
 ## Part 2: Installation
 
-### One-Line Installation (Easiest, Recommended)
+### Option 1: Global Install + User-Level Config (Recommended)
 
 ```bash
-claude mcp add hydrossh npx mcp-hydrocoder-ssh@latest
+npm install -g mcp-hydrocoder-ssh
+claude mcp add -s user hydrossh mcp-hydrocoder-ssh
 ```
 
-Restart Claude Code and you're done!
+### Option 2: No Install + User-Level Config
 
-### Option 2: Global Installation
+```bash
+claude mcp add -s user hydrossh npx mcp-hydrocoder-ssh@latest
+```
+
+### Option 3: Global Install + Project-Level Config
 
 ```bash
 npm install -g mcp-hydrocoder-ssh
 claude mcp add hydrossh mcp-hydrocoder-ssh
 ```
 
-### Option 3: Manual JSON Configuration
+### Option 4: No Install + Project-Level Config
 
-Edit `~/.claude.json`:
-
-**Windows path:** `C:\Users\<YourUsername>\.claude.json`
-**macOS/Linux path:** `~/.claude.json`
-
-```json
-{
-  "mcpServers": {
-    "hydrossh": {
-      "command": "npx",
-      "args": ["-y", "mcp-hydrocoder-ssh@latest"]
-    }
-  }
-}
+```bash
+claude mcp add hydrossh npx mcp-hydrocoder-ssh@latest
 ```
 
-> **Note:**
-> - `hydrossh` is the server identifier, can be changed to any name you prefer.
-> - `-y` flag lets npx auto-confirm installation, avoiding interactive prompts.
+> **Notes:**
+> - `-s user` flag sets user-level MCP configuration, available to all projects
+> - Without `-s user`, configuration is project-level, only available to current project
+> - Using `npx` does not require pre-installing the npm package
 
 ### Verify Installation
 
