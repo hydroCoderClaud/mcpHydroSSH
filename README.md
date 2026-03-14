@@ -56,20 +56,20 @@ npm install -g mcp-hydrocoder-ssh
 claude mcp add -s user hydrossh mcp-hydrocoder-ssh
 ```
 
-### Option 2: No Install + User-Level Config
-
-```bash
-claude mcp add -s user hydrossh npx mcp-hydrocoder-ssh@latest
-```
-
-### Option 3: Global Install + Project-Level Config
+### Option 2: Global Install + Project-Level Config
 
 ```bash
 npm install -g mcp-hydrocoder-ssh
 claude mcp add hydrossh mcp-hydrocoder-ssh
 ```
 
-### Option 4: No Install + Project-Level Config
+### Option 3: npx Install + User-Level Config
+
+```bash
+claude mcp add -s user hydrossh npx mcp-hydrocoder-ssh@latest
+```
+
+### Option 4: npx Install + Project-Level Config
 
 ```bash
 claude mcp add hydrossh npx mcp-hydrocoder-ssh@latest

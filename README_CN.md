@@ -56,20 +56,20 @@ npm install -g mcp-hydrocoder-ssh
 claude mcp add -s user hydrossh mcp-hydrocoder-ssh
 ```
 
-### 方式 2: 程序不安装 + 配置用户级
-
-```bash
-claude mcp add -s user hydrossh npx mcp-hydrocoder-ssh@latest
-```
-
-### 方式 3: 程序全局安装 + 配置项目级
+### 方式 2: 程序全局安装 + 配置项目级
 
 ```bash
 npm install -g mcp-hydrocoder-ssh
 claude mcp add hydrossh mcp-hydrocoder-ssh
 ```
 
-### 方式 4: 程序不安装 + 配置项目级
+### 方式 3: npx 安装 + 配置用户级
+
+```bash
+claude mcp add -s user hydrossh npx mcp-hydrocoder-ssh@latest
+```
+
+### 方式 4: npx 安装 + 配置项目级
 
 ```bash
 claude mcp add hydrossh npx mcp-hydrocoder-ssh@latest
